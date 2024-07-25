@@ -1,5 +1,6 @@
 import sys
 from user import UserManager
+from book import BookManager
 
 def main_menu():
     print("\nLibrary Management System")
@@ -8,12 +9,18 @@ def main_menu():
     print("3. Search Users")
     print("4. Delete User")
     print("5. Update User")
+    print("6. Add Book")
+    print("7. List Books")
+    print("8. Search Books")
+    print("9. Delete Book")
+    print("10. Update Book")
     print("0. Exit")
     choice = input("Enter choice: ")
     return choice
 
 def main():
     user_manager = UserManager()
+    book_manager = BookManager()
 
     while True:
         choice = main_menu()
@@ -54,6 +61,62 @@ def main():
                 user_manager.update_user(user_input, new_name, new_password)
             else:
                 print(f"User with name '{user_input}' not found.")
+        
+        elif choice == '6':
+            title = input("Enter book title: ")
+            author = input("Enter book author: ")
+            isbn = input("Enter book ISBN: ")
+            qty = int(input("Enter book quantity: "))
+            book_manager.add_book(title, author, isbn, qty)
+        
+        elif choice == '7':
+            books = book_manager.list_books()
+            for book in books:
+                print(book)
+        
+        elif choice == '8':
+            search_by = input("Search book by ISBN, title, or author? ").lower()
+            if search_by == 'isbn':
+                isbn = input("Enter book ISBN: ")
+                books = book_manager.search_books(isbn=isbn)
+            elif search_by == 'title':
+                title = input("Enter book title: ").lower()
+                books = book_manager.search_books(title=title)
+            elif search_by == 'author':
+                author = input("Enter book author: ").lower()
+                books = book_manager.search_books(author=author)
+            else:
+                print("Invalid search criteria.")
+                continue
+            for book in books:
+                print(book)
+        
+        elif choice == '9':
+            isbn = input("Delete book by ISBN: ")
+            books = book_manager.search_books(isbn=isbn)
+            if books:
+                book_manager.delete_book(isbn)
+            else:
+                print(f"Book with ISBN '{isbn}' not found.")
+        
+        elif choice == '10':
+            isbn = input("Update book by ISBN: ")
+            books = book_manager.search_books(isbn=isbn)
+            if books:
+                new_title = input("Enter new title (leave blank to keep current title): ")
+                new_author = input("Enter new author (leave blank to keep current author): ")
+                new_qty = input("Enter new quantity (leave blank to keep current quantity): ")
+                if new_title == '':
+                    new_title = None
+                if new_author == '':
+                    new_author = None
+                if new_qty == '':
+                    new_qty = None
+                else:
+                    new_qty = int(new_qty)
+                book_manager.update_book(isbn, new_title, new_author, new_qty)
+            else:
+                print(f"Book with ISBN '{isbn}' not found.")
         
         elif choice == '0':
             print("Exiting.")

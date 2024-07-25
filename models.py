@@ -40,7 +40,7 @@ class Book:
         self.author = author
         self.isbn = isbn
         self.qty = qty
-        self.date_added = datetime.now(tz='Asia/Kolkata').date()
+        self.date_added = datetime.now().date().strftime("%d-%b-%y")
     
     def to_dict(self):
         # return a book dictionary
@@ -68,7 +68,7 @@ class Transaction:
         self.user_id = user_id
         self.type = type
         self.qty = qty
-        self.date_added = datetime.now(tz='Asia/Kolkata').date()
+        self.date_added = datetime.now().date().strftime("%d-%b-%y")
     
     def to_dict(self):
         # return a transaction dictionary

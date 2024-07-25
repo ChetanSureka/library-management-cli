@@ -59,12 +59,12 @@ class StorageManager:
     # Read, write book data to file
 
     def add_book(self, book_data):
-        books = self._read_file(self.book_file)
+        books = self._read_file(self.books_file)
         books.append(book_data)
-        self._write_file(self.book_file, books)
+        self._write_file(self.books_file, books)
 
     def get_books(self):
-        return self._read_file(self.book_file)
+        return self._read_file(self.books_file)
 
     
     # read, write transaction data to file

@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "id": 90148063472114943689112029456102934088,
+        "title": "The big red fox vol 2",
+        "author": "unknown cs",
+        "isbn": "cs123",
+        "qty": 3,
+        "date_added": "26-Jul-24"
+    },
+    {
+        "id": 252089937763181752712279894235411401031,
+        "title": "purple turtle",
+        "author": "chetan",
+        "isbn": "bng78380",
+        "qty": 1,
+        "date_added": "26-Jul-24"
+    }
+]
