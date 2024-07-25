@@ -11,7 +11,7 @@ class User:
     def __init__(self, name: str, password: str):
         self.id = uuid.uuid4().int
         self.name = name
-        self.password = sha256(password)
+        self.password = self.hash_pass(password)
     
     def hash_pass(self, password: str):
         # hash the raw password into sha256 encoded

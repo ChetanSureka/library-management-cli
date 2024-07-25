@@ -1,43 +1,63 @@
-# This is a deliberately poorly implemented main script for a Library Management System.
-
-import book_management
-import user_management
-import checkout_management
+import sys
+from user import UserManager
 
 def main_menu():
     print("\nLibrary Management System")
-    print("1. Add Book")
-    print("2. List Books")
-    print("3. Add User")
-    print("4. Checkout Book")
-    print("5. Exit")
+    print("1. Add User")
+    print("2. List Users")
+    print("3. Search Users")
+    print("4. Delete User")
+    print("5. Update User")
+    print("0. Exit")
     choice = input("Enter choice: ")
     return choice
 
 def main():
+    user_manager = UserManager()
+
     while True:
         choice = main_menu()
         if choice == '1':
-            title = input("Enter title: ")
-            author = input("Enter author: ")
-            isbn = input("Enter ISBN: ")
-            book_management.add_book(title, author, isbn)
-            print("Book added.")
+            name = input("Enter user name: ").lower()
+            password = input("Enter user password: ")
+            user_manager.add_user(name, password)
+        
         elif choice == '2':
-            book_management.list_books()
+            users = user_manager.list_users()
+            for user in users:
+                print(user)
+        
         elif choice == '3':
-            name = input("Enter user name: ")
-            user_id = input("Enter user ID: ")
-            user_management.add_user(name, user_id)
-            print("User added.")
+            user_input = input("Search user by name: ").lower()
+            users = user_manager.search_user(name=user_input)
+            for user in users:
+                print(user)
+        
         elif choice == '4':
-            user_id = input("Enter user ID: ")
-            isbn = input("Enter ISBN of the book to checkout: ")
-            checkout_management.checkout_book(user_id, isbn)
-            print("Book checked out.")
+            user_input = input("Delete user by name: ").lower()
+            users = user_manager.search_user(name=user_input)
+            if users:
+                user_manager.delete_user(user_input)
+            else:
+                print(f"User with name '{user_input}' not found.")
+        
         elif choice == '5':
+            user_input = input("Update user by name: ").lower()
+            users = user_manager.search_user(name=user_input)
+            if users:
+                new_name = input("Enter new name (leave blank to keep current name): ").lower()
+                new_password = input("Enter new password (leave blank to keep current password): ")
+                if new_name == '':
+                    new_name = None
+                if new_password == '':
+                    new_password = None
+                user_manager.update_user(user_input, new_name, new_password)
+            else:
+                print(f"User with name '{user_input}' not found.")
+        
+        elif choice == '0':
             print("Exiting.")
-            break
+            sys.exit()
         else:
             print("Invalid choice, please try again.")
 
