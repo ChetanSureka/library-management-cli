@@ -1,6 +1,7 @@
 import sys
 from user import UserManager
 from book import BookManager
+from check import TransactionManager
 
 def main_menu():
     print("\nLibrary Management System")
@@ -14,6 +15,10 @@ def main_menu():
     print("8. Search Books")
     print("9. Delete Book")
     print("10. Update Book")
+    print("11. Check Out Book")
+    print("12. Check In Book")
+    print("13. List Transactions")
+    print("14. Search Transactions")
     print("0. Exit")
     choice = input("Enter choice: ")
     return choice
@@ -21,6 +26,7 @@ def main_menu():
 def main():
     user_manager = UserManager()
     book_manager = BookManager()
+    transaction_manager = TransactionManager()
 
     while True:
         choice = main_menu()
@@ -117,6 +123,40 @@ def main():
                 book_manager.update_book(isbn, new_title, new_author, new_qty)
             else:
                 print(f"Book with ISBN '{isbn}' not found.")
+        
+        elif choice == '11':
+            user_name = input("Enter user name: ").lower()
+            isbn = input("Enter book ISBN: ")
+            qty = int(input("Enter quantity to check out: "))
+            transaction_manager.check_out_book(user_name, isbn, qty)
+        
+        elif choice == '12':
+            user_name = input("Enter user name: ").lower()
+            isbn = input("Enter book ISBN: ")
+            qty = int(input("Enter quantity to check in: "))
+            transaction_manager.check_in_book(user_name, isbn, qty)
+        
+        elif choice == '13':
+            transactions = transaction_manager.list_transactions()
+            for transaction in transactions:
+                print(transaction)
+        
+        elif choice == '14':
+            search_by = input("Search transactions by book title, user name, or type? ").lower()
+            if search_by == 'title':
+                book_title = input("Enter book title: ").lower()
+                transactions = transaction_manager.search_transactions(book_title=book_title)
+            elif search_by == 'user name':
+                user_name = input("Enter user name: ").lower()
+                transactions = transaction_manager.search_transactions(user_name=user_name)
+            elif search_by == 'type':
+                transaction_type = input("Enter transaction type (check-in/check-out): ").lower()
+                transactions = transaction_manager.search_transactions(transaction_type=transaction_type)
+            else:
+                print("Invalid search criteria.")
+                continue
+            for transaction in transactions:
+                print(transaction)
         
         elif choice == '0':
             print("Exiting.")

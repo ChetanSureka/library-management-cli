@@ -70,11 +70,11 @@ class StorageManager:
     # read, write transaction data to file
     
     def add_transaction(self, transaction_data):
-        transactions = self._read_file(self.transaction_file)
+        transactions = self._read_file(self.transactions_file)
         transactions.append(transaction_data)
-        self._write_file(self.transaction_file, transactions)
+        self._write_file(self.transactions_file, transactions)
 
     def get_transactions(self):
-        return self._read_file(self.transaction_file)
+        return self._read_file(self.transactions_file)
 
 
