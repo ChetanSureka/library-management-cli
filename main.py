@@ -4,22 +4,27 @@ from book import BookManager
 from check import TransactionManager
 
 def main_menu():
-    print("\nLibrary Management System")
-    print("1. Add User")
-    print("2. List Users")
-    print("3. Search Users")
-    print("4. Delete User")
-    print("5. Update User")
-    print("6. Add Book")
-    print("7. List Books")
-    print("8. Search Books")
-    print("9. Delete Book")
-    print("10. Update Book")
-    print("11. Check Out Book")
-    print("12. Check In Book")
-    print("13. List Transactions")
-    print("14. Search Transactions")
-    print("0. Exit")
+    print("\n" + "="*90)
+    print(" "*35 + "Library Management System" + " "*15)
+    print("="*90)
+    
+    # User Management Section
+    print(f"{'User Management':<30} || ", end="")
+    
+    # Book Management Section
+    print(f"{'Book Management':<30} || ", end="")
+    
+    # Transaction Management Section
+    print(f"{'Transaction Management':<30}")
+    print("="*90)
+    
+    print("1. Add User".ljust(30) + " || " + "6. Add Book".ljust(30) + "|| " + "11. Check Out Book".ljust(30))
+    print("2. List Users".ljust(30) + " || " + "7. List Books".ljust(30) + "|| " + "12. Check In Book".ljust(30))
+    print("3. Search Users".ljust(30) + " || " + "8. Search Books".ljust(30) + "|| " + "13. List Transactions".ljust(30))
+    print("4. Delete User".ljust(30) + " || " + "9. Delete Book".ljust(30) + "|| " + "14. Search Transactions".ljust(30))
+    print("5. Update User".ljust(30) + " || " + "10. Update Book".ljust(30) + "|| " + "0. Exit".ljust(30))
+    print("="*90)
+    
     choice = input("Enter choice: ")
     return choice
 
@@ -30,6 +35,7 @@ def main():
 
     while True:
         choice = main_menu()
+
         if choice == '1':
             name = input("Enter user name: ").lower()
             password = input("Enter user password: ")
@@ -164,5 +170,6 @@ def main():
         else:
             print("Invalid choice, please try again.")
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()

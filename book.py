@@ -31,23 +31,19 @@ class BookManager:
     
     def add_book(self, title, author, isbn, qty):
         # add book to the list
-        
         books = self.store.get_books()
         
         for book in books:
             if book["isbn"] == isbn:
-                print(f"Book with ISBN {isbn} already exists.")
                 return
         
         new_book = Book(title, author, isbn, qty)
         self.store.add_book(new_book.to_dict())
-        print(f"Book {title} added successfully.")
 
     
     
     def update_book(self, isbn, new_title=None, new_author=None, new_qty=None):
         # update book details
-        
         books = self.store.get_books()
         for book in books:
             if book["isbn"] == isbn:
@@ -59,22 +55,16 @@ class BookManager:
                     book["qty"] = new_qty
                 
                 self.store._write_file(self.store.books_file, books)
-                print(f"Updated book with ISBN {isbn} successfully.")
                 return 
-        print(f"Book with ISBN {isbn} not found.")
         return
     
     
     
     def delete_book(self, isbn):
         # delete book by ISBN
-        
         books = self.store.get_books()
         updated_books = [book for book in books if book['isbn'] != isbn]
         
         if len(updated_books) != len(books):
             self.store._write_file(self.store.books_file, updated_books)
-            print(f"Book with ISBN {isbn} deleted.")
-        else:
-            print(f"Book with ISBN {isbn} not found.")
         return

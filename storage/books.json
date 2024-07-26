@@ -4,7 +4,7 @@
         "title": "The big red fox vol 2",
         "author": "unknown cs",
         "isbn": "cs123",
-        "qty": 0,
+        "qty": 10,
         "date_added": "26-Jul-24"
     },
     {
@@ -12,7 +12,15 @@
         "title": "purple turtle",
         "author": "chetan",
         "isbn": "bng78380",
-        "qty": 1,
+        "qty": 0,
+        "date_added": "26-Jul-24"
+    },
+    {
+        "id": 318833609163844212674241414811666619291,
+        "title": "book 1",
+        "author": "chetan",
+        "isbn": "1234",
+        "qty": 10,
         "date_added": "26-Jul-24"
     }
 ]
